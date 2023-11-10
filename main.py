@@ -14,5 +14,14 @@ class Browser:
 
 def main():
     browser = Browser()
-    browser.open()
+    while True:
+        print('1- Open tab')
+        print('2- Close tab')
+        print('3- Switch tab')
+        print('4- Display all tabs')
+        print('5- Open nested tabs')
+        print('6- Clear all tabs')
+        print('7- Save tabs')
+        print("8- Import tabs")
+        print('9-Exit')
 main()
