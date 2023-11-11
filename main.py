@@ -71,7 +71,10 @@ class Browser:
     def clearAllTabs(self):
          self.tabs = []
 
+    def classToDictionary(self):
+        return [tab.__dict__ for tab in self.tabs]
     def saveFile(self):
+        dict=self.classToDictionary()
         file = open("my file.txt", "w")#https://www.w3schools.com/python/python_file_write.asp this is were i learnt how to create and manipulate a file
         file_path = input('please enter the file path that you want to save the info in ')
         if os.path.exists(file_path):
