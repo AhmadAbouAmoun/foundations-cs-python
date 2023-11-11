@@ -72,7 +72,7 @@ class Browser:
          self.tabs = []
 
     def saveFile(self):
-        file = 
+        file = open("my file.txt", "w")#https://www.w3schools.com/python/python_file_write.asp this is were i learnt how to create and manipulate a file
         file_path = input('please enter the file path that you want to save the info in ')
         if os.path.exists(file_path):
         #https://bobbyhadz.com/blog/python-input-file-path here is the explanation for the os library and why i used it here
