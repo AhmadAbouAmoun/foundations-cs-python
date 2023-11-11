@@ -71,8 +71,6 @@ class Browser:
     def clearAllTabs(self):
          self.tabs = []
 
-    def classToDictionary(self):
-        return [tab.__dict__ for tab in self.tabs]
     
     def saveFile(self):
         dict=self.classToDictionary()
