@@ -9,6 +9,10 @@ class Tab:
         self.name = name
         self.url = url
         self.nested_tabs = nested_tabs or []
+    def tabToDictionary(self):
+        return {'name':self.name,
+                'url':self.url,
+                'nested_tabs':[nested_tabs.tabToDictionary() for nested_tabs in self.nested_tabs]}
 
 class Browser:
     def __init__(self):
@@ -71,9 +75,9 @@ class Browser:
     def clearAllTabs(self):
          self.tabs = []
 
-    
+
     def saveFile(self):
-        dict=self.classToDictionary()
+        dict=self.to_dict()
         file = open("my file.txt", "w")#https://www.w3schools.com/python/python_file_write.asp this is were i learnt how to create and manipulate a file
         file_path = input('please enter the file path that you want to save the info in ')
         print(dict)
