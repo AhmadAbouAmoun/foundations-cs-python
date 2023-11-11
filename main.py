@@ -1,4 +1,6 @@
 from bs4 import BeautifulSoup
+import requests
+import validators
 class Tab:
     def __init__(self, name, url, nested_tabs=None):
         self.name = name
@@ -17,7 +19,7 @@ class Browser:
     def closeTab(self):
         for i in range(len(self.tabs)-1):
              print(i, ".", self.tabs[i])
-        option = int(input("please enter which tab do you want to close (press enter to close the last opened tab) ")or "-1")
+        option = int(input("please enter which tab do you want to close (press enter to close the last opened tab) ") or "-1")
         #https://stackoverflow.com/questions/23377818/loop-on-if-statement-to-reject-invalid-input from here i learend how to set a deafult value
         if option == -1:
             del self.tabs[-1]
@@ -25,6 +27,24 @@ class Browser:
             del self.tabs[option]
         else:
             print("invalid option")
+
+    def switchTabs(self):
+        switched_tab = int(input('please enter which tab you want to switch to and display it (press enter to display the last opened tab)') or '-1')
+        if switched_tab == -1:
+            tab = self.tabs[-1]
+            if validators.url(tab.url):#https://stackoverflow.com/questions/7160737/how-to-validate-a-url-in-python-malformed-or-not this is the link to explain about the validators library and the validate.url function
+                page_to_scrape = requests.get(tab.url)
+                print(page_to_scrape)
+            else:
+                print("the URL provided for this tab is invalid")
+        elif switched_tab in range(len(self.tabs)):
+            tab = self.tabs[switched_tab]
+            if validators.url(tab.url):
+                page_to_scrape = requests.get(tab.url)
+                print(page_to_scrape)
+        else:
+            print("Invalid option")
+
 
     def displayAllTabs(self):
         for i in range(len(self.tabs)):
@@ -62,6 +82,8 @@ def main():
             browser.openTab()
         if choice == 2:
             browser.closeTab()
+        if choice == 3:
+            browser.switchTabs()
         if choice == 4:
             browser.displayAllTabs()
         if choice == 5:
