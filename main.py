@@ -81,7 +81,7 @@ class Browser:
         dict=[tabToDict(tab) for tab in self.tabs]
         return dict
     def saveFile(self):
-        browser_dic=self.to_dict()
+        browser_dic=self.classToDict()
         file = open("my file.txt", "w")#https://www.w3schools.com/python/python_file_write.asp this is were i learnt how to create and manipulate a file
         file_path = input('please enter the file path that you want to save the info in ')
         print(dict)
