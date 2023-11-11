@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 class Tab:
     def __init__(self, name, url, nested_tabs=None):
         self.name = name
