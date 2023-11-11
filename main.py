@@ -4,15 +4,17 @@ import requests
 import validators
 from lxml import html
 
+
+def tabToDict(Tab):
+    return {'name': Tab.name,
+            'url': Tab.url,
+            'nested_tabs': [tabToDict(nested_tabs) for nested_tabs in Tab.nested_tabs]}
 class Tab:
     def __init__(self, name, url, nested_tabs=None):
         self.name = name
         self.url = url
         self.nested_tabs = nested_tabs or []
-    def tabToDictionary(self):
-        return {'name':self.name,
-                'url':self.url,
-                'nested_tabs':[nested_tabs.tabToDictionary() for nested_tabs in self.nested_tabs]}
+
 
 class Browser:
     def __init__(self):
@@ -75,9 +77,11 @@ class Browser:
     def clearAllTabs(self):
          self.tabs = []
 
-
+    def classToDict(self):
+        dict=[tabToDict(tab) for tab in self.tabs]
+        return dict
     def saveFile(self):
-        dict=self.to_dict()
+        browser_dic=self.to_dict()
         file = open("my file.txt", "w")#https://www.w3schools.com/python/python_file_write.asp this is were i learnt how to create and manipulate a file
         file_path = input('please enter the file path that you want to save the info in ')
         print(dict)
