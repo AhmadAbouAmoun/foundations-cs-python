@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import os
 import requests
 import validators
 from lxml import html
@@ -22,7 +23,7 @@ class Browser:
         for i in range(len(self.tabs)-1):
              print(i, ".", self.tabs[i])
         option = int(input("please enter which tab do you want to close (press enter to close the last opened tab) ") or "-1")
-        #https://stackoverflow.com/questions/23377818/loop-on-if-statement-to-reject-invalid-input from here i learend how to set a deafult value
+        #https://stackoverflow.com/questions/23377818/loop-on-if-statement-to-reject-invalid-input from here i learned how to set a default value
         if option == -1:
             del self.tabs[-1]
         elif option in range(len(self.tabs)-1):
@@ -70,6 +71,14 @@ class Browser:
     def clearAllTabs(self):
          self.tabs = []
 
+    def saveFile(self):
+        file = 
+        file_path = input('please enter the file path that you want to save the info in ')
+        if os.path.exists(file_path):
+        #https://bobbyhadz.com/blog/python-input-file-path here is the explanation for the os library and why i used it here
+            fullpath = os.path.join(file_path, file)
+
+
 def main():
     browser = Browser()
     while True:
@@ -95,6 +104,8 @@ def main():
             browser.openNestedTab()
         if choice == 6:
             browser.clearAllTabs()
+        if choice == 7:
+            browser.saveFile()
         if choice == 9:
             break
 main()
