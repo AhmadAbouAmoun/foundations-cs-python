@@ -83,7 +83,7 @@ class Browser:
         dict=[tabToDict(tab) for tab in self.tabs]
         return dict
     def saveFile(self):
-        browser_dic = self.classToDict()
+        browser_dict = self.classToDict()
         file_name = input('enter the name of the file ')
 
         file_path=input("please enter the path that you want to save the file in ")
@@ -99,9 +99,12 @@ class Browser:
             with open(file_name, 'w') as file:
              file.write(json.dumps(json_string,ensure_ascii=False,indent=4))
 
-
-
-
+    def importFiles(self):
+        file_name=('please enter the name of the file that you want to open ')
+        file_path = input('please enter the files directory ')
+        if os.path.exists(file_path):
+            with open(file_name,'r') as f:
+                browser_dict = json.loads(f.read())
 def main():
     browser = Browser()
     while True:
@@ -129,6 +132,8 @@ def main():
             browser.clearAllTabs()
         if choice == 7:
             browser.saveFile()
+        if choice == 8:
+            browser.importFile()
         if choice == 9:
             break
 main()
