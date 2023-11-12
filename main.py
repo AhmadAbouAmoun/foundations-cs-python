@@ -89,15 +89,15 @@ class Browser:
         file_path=input("please enter the path that you want to save the file in ")
         if os.path.exists(file_path):
             #https://bobbyhadz.com/blog/python-input-file-path here is the explanation for the os library and why i used it here
-            complete_name = os.path.join(file_path, file_name + ".txt")
+            complete_name = os.path.join(file_path, file_name + ".txt")#https://stackoverflow.com/questions/8024248/telling-python-to-save-a-txt-file-to-a-certain-directory-on-windows-and-mac this is were i got i learnt about os join
             json_string = json.dumps(browser_dic)
             with open(complete_name, 'w') as file:
                 file.write(json.dumps(json_string))
         else:
             print('the path is not valid we will save it in the same directory in the current directory ')
-            json_string = json.dumps(browser_dic,indent=2)
+            json_string = json.dumps(browser_dic,encoding='utf-8')#https://youtu.be/jABj-SEhtBc?si=6NuPANZI72Asgz2- this is the video that helped me in options number 7 and 8
             with open(file_name, 'w') as file:
-             file.write(json.dumps(json_string))
+             file.write(json.dumps(json_string,ensure_ascii=False,indent=4))
 
 
 
