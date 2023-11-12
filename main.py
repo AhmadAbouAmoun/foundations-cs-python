@@ -2,9 +2,8 @@ from bs4 import BeautifulSoup
 import os
 import requests
 import validators
-from lxml import html
+from bs4 import BeautifulSoup
 import json
-import sys
 
 
 def tabToDict(Tab):
@@ -49,16 +48,18 @@ class Browser:
             if validators.url(tab.url):
             #https://stackoverflow.com/questions/7160737/how-to-validate-a-url-in-python-malformed-or-not this is the link to explain about the validators library and the validate.url function
                 page_to_scrape = requests.get(tab.url)
-                scraped = html.fromstring(page_to_scrape.content)
-                print(scraped)
+                #https://youtu.be/hlSR0JAKpeQ?si=gjUaudGJgkd_sz4W from here i learnt how to scrape the html content of a page
+                scraped = BeautifulSoup(page_to_scrape.content,'html.parser')
+                print(scraped.prettify())
+
             else:
                 print("the URL provided for this tab is invalid")
         elif switched_tab in range(len(self.tabs)):
             tab = self.tabs[switched_tab]
             if validators.url(tab.url):
                 page_to_scrape = requests.get(tab.url)
-                scraped = html.fromstring(page_to_scrape.content)
-                print(scraped)
+                scraped = BeautifulSoup(page_to_scrape.content, 'html.parser')
+                print(scraped.prettify())
         else:
             print("Invalid option")
 
@@ -127,20 +128,22 @@ def main():
         choice = int(input('please enter your choice '))
         if choice == 1:
             browser.openTab()
-        if choice == 2:
+        elif choice == 2:
             browser.closeTab()
-        if choice == 3:
+        elif choice == 3:
             browser.switchTabs()
-        if choice == 4:
+        elif choice == 4:
             browser.displayAllTabs()
-        if choice == 5:
+        elif choice == 5:
             browser.openNestedTab()
-        if choice == 6:
+        elif choice == 6:
             browser.clearAllTabs()
-        if choice == 7:
+        elif choice == 7:
             browser.saveFile()
-        if choice == 8:
+        elif choice == 8:
             browser.importFile()
-        if choice == 9:
+        elif choice == 9:
             break
+        else:
+            print('invalid option')
 main()
