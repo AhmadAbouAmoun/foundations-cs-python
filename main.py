@@ -105,6 +105,7 @@ class Browser:
         if os.path.exists(file_path):
             with open(file_name,'r') as f:
                 browser_dict = json.loads(f.read())
+            print(browser_dict)
 def main():
     browser = Browser()
     while True:
