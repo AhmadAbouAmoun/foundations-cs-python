@@ -4,6 +4,7 @@ import requests
 import validators
 from lxml import html
 import json
+import pathlib
 
 
 def tabToDict(Tab):
@@ -84,13 +85,20 @@ class Browser:
     def saveFile(self):
         browser_dic = self.classToDict()
         file_name = input('enter the name of the file ')
-        file_path = input('please enter the file path that you want to save the info in ')
-        if os.path.exists(file_path):
+
+        directory=input("please enter the path that you want to save the file in ")
+        if os.path.exists(directory):
         #https://bobbyhadz.com/blog/python-input-file-path here is the explanation for the os library and why i used it here
-            complete_name = os.path.join(file_path, file_name+".txt")
+            complete_name = os.path.join(directory, file_name)
             json_string = json.dumps(browser_dic)
-            with open(complete_name,'w') as f:
-                f.write(json_string)
+            with open(complete_name, 'w') as file:
+                file.write(json.dumps(json_string))
+        else:
+            print('the path is not valid we will save it in the same directory in the current directory ')
+            json_string = json.dumps(browser_dic,indent=2)
+            with open(file_name, 'w') as file:
+             file.write(json.dumps(json_string))
+
 
 
 
