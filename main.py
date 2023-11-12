@@ -132,7 +132,11 @@ class Browser:
             with open(complete_name,'r') as f:
                 browser_dict = json.loads(f.read())#https://youtu.be/jABj-SEhtBc?si=6NuPANZI72Asgz2- again this video taught me about json
             print(browser_dict)
+        else:
+            print('Sorry  but this path does not exist')
+
 #the importFile method will ask the user to give the name of the file that he wants to open and its path then it will check if the path exists then open it and extract the details from it
+
 def main():
     browser = Browser()
     while True:
