@@ -86,10 +86,10 @@ class Browser:
         browser_dic = self.classToDict()
         file_name = input('enter the name of the file ')
 
-        directory=input("please enter the path that you want to save the file in ")
-        if os.path.exists(directory):
-        #https://bobbyhadz.com/blog/python-input-file-path here is the explanation for the os library and why i used it here
-            complete_name = os.path.join(directory, file_name)
+        file_path=input("please enter the path that you want to save the file in ")
+        if os.path.exists(file_path):
+            #https://bobbyhadz.com/blog/python-input-file-path here is the explanation for the os library and why i used it here
+            complete_name = os.path.join(file_path, file_name + ".txt")
             json_string = json.dumps(browser_dic)
             with open(complete_name, 'w') as file:
                 file.write(json.dumps(json_string))
