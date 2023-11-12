@@ -88,7 +88,9 @@ class Browser:
         if os.path.exists(file_path):
         #https://bobbyhadz.com/blog/python-input-file-path here is the explanation for the os library and why i used it here
             complete_name = os.path.join(file_path, file_name+".txt")
-            file = open(complete_name,'w')
+            json_string = json.dumps(browser_dic)
+            with open(complete_name,'w') as f:
+                f.write(json_string)
 
 
 
