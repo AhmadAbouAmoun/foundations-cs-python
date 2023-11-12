@@ -3,6 +3,7 @@ import os
 import requests
 import validators
 from lxml import html
+import json
 
 
 def tabToDict(Tab):
@@ -81,13 +82,14 @@ class Browser:
         dict=[tabToDict(tab) for tab in self.tabs]
         return dict
     def saveFile(self):
-        browser_dic=self.classToDict()
-        file = open("my file.txt", "w")#https://www.w3schools.com/python/python_file_write.asp this is were i learnt how to create and manipulate a file
+        browser_dic = self.classToDict()
+        file_name = input('enter the name of the file ')
         file_path = input('please enter the file path that you want to save the info in ')
-        print(dict)
         if os.path.exists(file_path):
         #https://bobbyhadz.com/blog/python-input-file-path here is the explanation for the os library and why i used it here
-            fullpath = os.path.join(file_path, file)
+            complete_name = os.path.join(file_path, file_name+".txt")
+            file = open(complete_name,'w')
+
 
 
 def main():
