@@ -1,31 +1,36 @@
-class node():
-   def __init__(self,data):
-       self.data = data
-       self.next = None
-class linkedList():
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
     def __init__(self):
         self.head = None
 
-    def add_node(self):
-        data = input('please enter the data of the linked list')
-        new_node = node(data)
-        if self.head is None:
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
             self.head = new_node
-            print('first node')
-        else:
-            new_node.next=self.head
-            self.head=new_node
-            print('it has been updated')
+            return
+        last_node = self.head
+        while last_node.next:
+            last_node = last_node.next
+        last_node.next = new_node
 
-    def display_linked_list(self):
-        current = self.head
-        while current:
-            print(current.data, end=" -> ")
-            current = current.next
+    def print_list(self):
+        current_node = self.head
+        while current_node:
+            print(current_node.data, end=" -> ")
+            current_node = current_node.next
         print("None")
+    def delete_node(self,info):
+        current=self.head
+        while current:
+            if current.data==info:
 
 
 def main():
+    ll = LinkedList()
     while True:
         print('1. Singly Linked List')
         print('2. Check if Palindrome')
@@ -34,7 +39,7 @@ def main():
         print('5. Graph')
         print('6. Exit')
         choice = input('choose what you want ')
-        ll = linkedList()
+
         if choice == '1':
             print('a. Add Node')
             print('b. Display Nodes')
@@ -42,9 +47,10 @@ def main():
             print('d. Return to main menu')
             option = input('please choose ')
             if option == 'a':
-                ll.add_node()
+                data = input("please enter data ")
+                ll.append(data)
             if option == 'b':
-                ll.display_linked_list()
+                ll.print_list()
 
 
 main()
