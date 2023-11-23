@@ -65,6 +65,7 @@ def main():
             elif option == 'c':
                 info=input("please enter the value that you want to delete ")
                 ll.delete_node(info)
-            
+            elif option == "d":
+                continue
 
 main()
