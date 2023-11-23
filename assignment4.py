@@ -57,15 +57,26 @@ class Stack:
             current.next=None
             self.size-=1
     def peek(self):
-        if self.size==0
+        if self.size==0:
             print('nothing')
-        else
+        else:
             return self.head.data
+    def Palindrome(self,string1):
+        s=Stack()
+        for i in range(len(string1)):
+            self.push(string1[i])
+        reversed_string = ""
+        for j in range(len(string1)):
+            reversed_string += self.peek()
+            self.pop()
 
-
-
+        if string1 == reversed_string:
+            print(string1, ' is palindromic')
+        else:
+            print(string1, ' is not palindromic')
 def main():
     ll = LinkedList()
+    stack=Stack()
     while True:
         print('1. Singly Linked List')
         print('2. Check if Palindrome')
@@ -87,11 +98,13 @@ def main():
             elif option == 'b':
                 ll.print_list()
             elif option == 'c':
-                info=input("please enter the value that you want to delete ")
+                info = input("please enter the value that you want to delete ")
                 ll.delete_node(info)
             elif option == "d":
                 continue
         elif choice == '2':
+            string1 = input("please enter the first string ")
+            stack.Palindrome(string1)
 
 
 main()
