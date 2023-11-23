@@ -25,8 +25,19 @@ class LinkedList:
         print("None")
     def delete_node(self,info):
         current=self.head
-        while current:
+        while current and current.data==info:
+            self.head=current.next
+            current=self.head
+        prev_node=None
+        while current :
             if current.data==info:
+                prev_node.next=current.next
+                current=current.next
+            else:
+                prev_node=current
+                current=current.next
+
+
 
 
 def main():
@@ -49,8 +60,11 @@ def main():
             if option == 'a':
                 data = input("please enter data ")
                 ll.append(data)
-            if option == 'b':
+            elif option == 'b':
                 ll.print_list()
-
+            elif option == 'c':
+                info=input("please enter the value that you want to delete ")
+                ll.delete_node(info)
+            
 
 main()
