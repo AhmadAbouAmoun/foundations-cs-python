@@ -37,6 +37,30 @@ class LinkedList:
                 prev_node=current
                 current=current.next
 
+class Stack:
+    def __init__(self):
+        self.head=None
+        self.size=0
+    def isEmpty(self):
+        return self.head==None
+    def push(self,value):
+        node=Node(value)
+        node.next=self.head
+        self.head=node
+        self.size+=1
+    def pop(self):
+        if self.size==0:
+            print("nothing")
+        else:
+            current=self.head
+            self.head=self.head.next
+            current.next=None
+            self.size-=1
+    def peek(self):
+        if self.size==0
+            print('nothing')
+        else
+            return self.head.data
 
 
 
@@ -67,5 +91,7 @@ def main():
                 ll.delete_node(info)
             elif option == "d":
                 continue
+        elif choice == '2':
+
 
 main()
