@@ -268,12 +268,42 @@ class Graph:
         else:
             print('vertex',v2," is invalid")
 
+    def remove_vertex(self, v):
+        if 0 <= v < self.num_vertices:
+            del self.adj_matrix[v]
+            for row in self.adj_matrix:
+                del row[v]
+            self.num_vertices -= 1
+    def remove_edge(self,v1,v2):
+        if 0<=v1< self.num_vertices and 0<=v2< self.num_vertices:
+            self.adj_matrix[v1][v2]=0
+            self.adj_matrix[v2][v1]=0
+        elif (v1 < 0 or v1 >= self.num_vertices) and (v2 < 0 or v2 >= self.num_vertices):
+            print('Invalid vertices')
+        elif v1 < 0 or v1 >= self.num_vertices:
+            print('vertex', v1, " is invalid")
+        else:
+            print('vertex', v2, " is invalid")
+    def count_degrees(self,n):
+        degrees = [0] * self.num_vertices
+        vertices_to_display = []
+        for i in range(self.num_vertices):
+            for j in range(self.num_vertices):
+                if self.adj_matrix[i][j] == 1:
+                    degrees[i] += 1
+        for i in range(len(degrees)):
+            if degrees[i] >= n:
+                vertices_to_display.append(i)
+        print(f"Vertices with degree >= {n}:")
+        for vertex in vertices_to_display:
+            print(vertex)
 
 
 def main():
     ll = LinkedList()
     stack=Stack()
     queue=PriorityQueue()
+    graph=Graph(0)
     while True:
         print('1. Singly Linked List')
         print('2. Check if Palindrome')
@@ -317,8 +347,33 @@ def main():
             elif option == 'c':
                 continue
         elif choice == '4':
-            infix_expression = input("Enter the infix expression: ")
-            result = stack.evaluate_infix_expression(infix_expression)
-            print(result)
+            expression = input("Enter the infix expression: ")
+            print(stack.evaluate_infix_expression(expression))
+        elif choice == '5':
+            print('a. Add vertex')
+            print('b. Add edge')
+            print('c. Remove vertex')
+            print('d. Remove edge')
+            print('e. Display vertices with a degree of X or more.')
+            print('f. Return to main menu')
+            option = input('please choose ')
+            if option == 'a':
+                graph.addVertex()
+            elif option == 'b':
+                v1=int(input('please enter the first vertex '))
+                v2=int(input('please enter the second vertex '))
+                graph.addEdge(v1,v2)
+            elif option == 'c':
+                v=input('please enter the vertex you want to remove ')
+                graph.remove_vertex(v)
+            elif option == 'd':
+                v1=int(input('please enter the first vertex '))
+                v2=int(input('please enter the first vertex '))
+                graph.remove_edge(v1,v2)
+            elif option == 'e':
+                degree=int(input('please enter the degree of the verticese you want to diplay '))
+                graph.count_degrees(degree)
+            elif option == 'f':
+                continue
 
 main()
