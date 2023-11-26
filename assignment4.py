@@ -139,6 +139,7 @@ class PriorityQueue:
     def isEmpty(self):
         return self.head==None
     def enqueue(self,midterm,final,attitude):
+        #am really sorry but this code is not working as intended and i don't know how to fix it
         node=Student(midterm,final,attitude)
         if self.size == 0:
             self.head = node
