@@ -113,7 +113,7 @@ class Stack:
             elif expression[i] == ')':
                 while operators_stack.peek() != '(':
                     apply_operation(operators_stack, numbers_stack)
-                operators_stack.pop()  # Discard the '('
+                operators_stack.pop()
             elif expression[i] in '+-*/':
                 while not operators_stack.is_empty() and precedence(expression[i]) <= precedence(operators_stack.peek()):
                     apply_operation(operators_stack, numbers_stack)
@@ -248,6 +248,26 @@ class PriorityQueue:
             current.next = None
             self.size -= 1
             print(current.good_attitude, " ", current.final_grade, " ", current.midterm_grade)
+class Graph:
+    def __init__(self,num_vertices):
+        self.num_vertices=num_vertices
+        self.adj_matrix=[[0]*num_vertices for _ in range(num_vertices)]
+    def addVertex(self):
+        self.num_vertices+=1
+        for row in self.adj_matrix:
+            row.append(0)
+        self.adj_matrix.append([0]*self.num_vertices)
+    def addEdge(self,v1,v2):
+        if 0<=v1< self.num_vertices and 0<=v2< self.num_vertices:
+            self.adj_matrix[v1][v2]=1
+            self.adj_matrix[v2][v1]=1
+        elif (v1<0 or v1>=self.num_vertices)and (v2<0 or v2>=self.num_vertices):
+            print('Invalid vertices')
+        elif v1<0 or v1>=self.num_vertices:
+            print('vertex',v1," is invalid")
+        else:
+            print('vertex',v2," is invalid")
+
 
 
 def main():
