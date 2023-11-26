@@ -80,9 +80,9 @@ class Student:
         self.midterm_grade = midterm_grade
         self.final_grade = final_grade
         self.good_attitude = good_attitude
-        self.next=None
+        self.next = None
 
-class FSW_Interview:
+class PriorityQueue:
     def __init__(self):
         self.head = None
         self.size = 0
@@ -159,21 +159,51 @@ class FSW_Interview:
                             current.next = node
                             node.next = None
             elif node.good_attitude == False and self.head == False:
-
+                if node.final_grade > self.head.final_grade:
+                    node.next = self.head
+                    self.head = node
+                    self.size += 1
+                elif node.final_grade == self.head.final_grade:
+                    if node.midterm_grade >= self.head.midterm_grade:
+                        node.next = self.head
+                        self.head = node
+                        self.size += 1
+                    else:
+                        current = self.head
+                        previous = current
+                        while current and current.final_grade > node.final_grade :
+                            previous=current
+                            current=current.next
+                            if current.final_grade == node.final_grade:
+                                if node.midterm_grade >= self.head.midterm_grade:
+                                    node.next = current
+                                    current = node
+                                    self.size += 1
+                                    break
+                        if current.final_grade < node.final_grade:
+                            node.next = current
+                            current = node
+                            self.size +=1
     def dequeue(self):
         if self.size == 0:
             print('it is already empty')
         elif self.size == 1:
+            print(self.head.final_grade," ",self.head.good_attitude," ",self.head.midterm_grade)
             self.head = None
             self.size -= 1
+
         else:
             current = self.head
             self.head = self.head.next
             current.next = None
             self.size -= 1
+            print(current.good_attitude, " ", current.final_grade, " ", current.midterm_grade)
+
+
 def main():
     ll = LinkedList()
     stack=Stack()
+    queue=PriorityQueue()
     while True:
         print('1. Singly Linked List')
         print('2. Check if Palindrome')
@@ -202,6 +232,20 @@ def main():
         elif choice == '2':
             string1 = input("please enter the first string ")
             stack.Palindrome(string1)
+        elif choice == '3':
+            print('a. Add a student to the queue')
+            print('b. Interview a student')
+            print('c. Return to main menu')
+            option = input('please choose ')
+            if option == 'a':
+                good_attitude=input('please enter the attitude of the student you want to add to the waiting list ')
+                final_grade = input('please enter the final grade of the student you want to add to the waiting list ')
+                midterm_grade = input('please enter the midterm grade of the student you want to add to the waiting list ')
+                queue.enqueue(midterm_grade,good_attitude,final_grade)
+            elif option == 'b':
+                queue.dequeue()
+            elif option == 'c':
+                continue
 
 
 main()
