@@ -36,33 +36,32 @@ class LinkedList:
             else:
                 prev_node=current
                 current=current.next
-
 class Stack:
     def __init__(self):
-        self.head=None
-        self.size=0
-    def isEmpty(self):
-        return self.head==None
-    def push(self,value):
-        node=Node(value)
-        node.next=self.head
-        self.head=node
-        self.size+=1
+        self.head = None
+
+    def is_empty(self):
+        return self.head is None
+
+    def push(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
     def pop(self):
-        if self.size==0:
-            print("nothing")
-        else:
-            current=self.head
-            self.head=self.head.next
-            current.next=None
-            self.size-=1
+        if self.is_empty():
+            return None
+        popped = self.head.data
+        self.head = self.head.next
+        return popped
+
     def peek(self):
-        if self.size==0:
-            print('nothing')
-        else:
-            return self.head.data
-    def Palindrome(self,string1):
-        s=Stack()
+        if self.is_empty():
+            return None
+        return self.head.data
+
+    def Palindrome(self, string1):
+        s = Stack()
         for i in range(len(string1)):
             self.push(string1[i])
         reversed_string = ""
@@ -74,6 +73,57 @@ class Stack:
             print(string1, ' is palindromic')
         else:
             print(string1, ' is not palindromic')
+
+    def evaluate_infix_expression(self, expression):
+        def precedence(operator):
+            if operator in '*/':
+                return 2
+            elif operator in '+-':
+                return 1
+            else:
+                return 0
+
+        def apply_operation(operators, numbers):
+            operator = operators.pop()
+            num2 = numbers.pop()
+            num1 = numbers.pop()
+            if operator == '+':
+                numbers.push(num1 + num2)
+            elif operator == '-':
+                numbers.push(num1 - num2)
+            elif operator == '*':
+                numbers.push(num1 * num2)
+            elif operator == '/':
+                numbers.push(num1 / num2)
+
+        numbers_stack = Stack()
+        operators_stack = Stack()
+
+        i = 0
+        while i < len(expression):
+            if expression[i].isdigit():
+                num = 0
+                while i < len(expression) and expression[i].isdigit():
+                    num = num * 10 + int(expression[i])
+                    i += 1
+                numbers_stack.push(num)
+                i -= 1
+            elif expression[i] == '(':
+                operators_stack.push(expression[i])
+            elif expression[i] == ')':
+                while operators_stack.peek() != '(':
+                    apply_operation(operators_stack, numbers_stack)
+                operators_stack.pop()  # Discard the '('
+            elif expression[i] in '+-*/':
+                while not operators_stack.is_empty() and precedence(expression[i]) <= precedence(operators_stack.peek()):
+                    apply_operation(operators_stack, numbers_stack)
+                operators_stack.push(expression[i])
+            i += 1
+
+        while not operators_stack.is_empty():
+            apply_operation(operators_stack, numbers_stack)
+
+        return numbers_stack.pop()
 
 class Student:
     def __init__(self,midterm_grade,final_grade,good_attitude):
@@ -246,6 +296,9 @@ def main():
                 queue.dequeue()
             elif option == 'c':
                 continue
-
+        elif choice == '4':
+            infix_expression = input("Enter the infix expression: ")
+            result = stack.evaluate_infix_expression(infix_expression)
+            print(result)
 
 main()
