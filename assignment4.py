@@ -304,6 +304,7 @@ def main():
     stack=Stack()
     queue=PriorityQueue()
     graph=Graph(0)
+    counter=0
     while True:
         print('1. Singly Linked List')
         print('2. Check if Palindrome')
@@ -371,9 +372,17 @@ def main():
                 v2=int(input('please enter the first vertex '))
                 graph.remove_edge(v1,v2)
             elif option == 'e':
-                degree=int(input('please enter the degree of the verticese you want to diplay '))
+                degree=int(input('please enter the degree of the vertices you want to display '))
                 graph.count_degrees(degree)
             elif option == 'f':
                 continue
-
+        elif choice == '6':
+            print('Have a Good Day')
+            break
+        else:
+            counter+=1
+            if counter<4:
+                print('please choose only from the given choices')
+            else:
+                break
 main()
